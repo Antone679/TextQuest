@@ -15,6 +15,6 @@ public class RestartServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         session.invalidate();
 
-        resp.sendRedirect("/gameover.jsp");
+        resp.sendRedirect("/welcome");
     }
 }

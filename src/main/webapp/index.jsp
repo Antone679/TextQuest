@@ -38,7 +38,7 @@
 
         <c:if test="${sessionScope.isCorrect != null && sessionScope.isCorrect == false}">
             <h2>Игра окончена!</h2>
-            <p>Вы ответили неправильно. Спасибо за участие!</p>
+            <p>${sessionScope.failure}</p>
             <p>Количество правильных ответов: ${sessionScope.counter}</p>
             <form action="restart" method="post">
                 <button type="submit">Попробовать еще раз!</button>
@@ -47,6 +47,10 @@
 
         <c:if test="${sessionScope.gameWon == true}">
             <h2>Поздравляем! Вы ответили на все вопросы правильно!</h2>
+            <p>Вы успешно преодолели все трудности на необитаемом острове!
+               Ваша находчивость и смелость помогли вам выжить.
+               Вы нашли укрытие, источники воды и пищи, а также смогли построить плот, который привел вас к спасению.
+               Поздравляем, вы выжили и вернулись домой!</p>
             <p>Количество правильных ответов: ${sessionScope.counter + 1}</p>
             <form action="restart" method="post">
                 <button type="submit">Попробовать еще раз!</button>

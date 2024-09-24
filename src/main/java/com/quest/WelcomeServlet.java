@@ -54,18 +54,23 @@ public class WelcomeServlet extends HttpServlet {
             counter++;
         }
 
-        Unit unit = questions.get(counter);
+        Integer correctAnswers;
+        if (isCorrect != null && isCorrect) {
+            correctAnswers = (Integer) session.getAttribute("correctAnswers");
+            session.setAttribute("correctAnswers", (correctAnswers == null ? 1 : correctAnswers + 1));
+        }
 
-        System.out.println(counter);
-        System.out.println(unit.getQuestion());
-
-        // Проверяем количество правильных ответов
-        Integer correctAnswers = (Integer) session.getAttribute("correctAnswers");
+        correctAnswers = (Integer) session.getAttribute("correctAnswers");
         if (correctAnswers != null && correctAnswers >= 10) {
+            System.out.println("отработка if");
             session.setAttribute("gameWon", true);
             resp.sendRedirect("index.jsp");
             return;
         }
+        System.out.println(correctAnswers);
+        Unit unit = questions.get(counter);
+
+        System.out.println(counter);
 
         // Если вопрос не null, продолжаем
         List<String> answers = new ArrayList<>();
@@ -74,15 +79,15 @@ public class WelcomeServlet extends HttpServlet {
         Collections.shuffle(answers);
 
         System.out.println(session.getAttribute("username"));
+
+        String description = unit.getFailureDescription();
+
         session.setAttribute("answers", answers);
         session.setAttribute("questions", questions);
         session.setAttribute("counter", counter);
         session.setAttribute("gameWon", false);
+        session.setAttribute("failure", description);
 
-        if (isCorrect != null && isCorrect) {
-            correctAnswers = (Integer) session.getAttribute("correctAnswers");
-            session.setAttribute("correctAnswers", (correctAnswers == null ? 1 : correctAnswers + 1));
-        }
 
         resp.sendRedirect("index.jsp");
     }
