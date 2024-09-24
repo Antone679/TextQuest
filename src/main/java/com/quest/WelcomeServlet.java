@@ -24,6 +24,8 @@ public class WelcomeServlet extends HttpServlet {
 
         HttpSession session = req.getSession(true);
 
+        String ipAddress = req.getRemoteAddr();
+        session.setAttribute("ipAddress", ipAddress);
 
         Boolean isCorrect = (Boolean) session.getAttribute("isCorrect");
 
@@ -62,7 +64,7 @@ public class WelcomeServlet extends HttpServlet {
 
         correctAnswers = (Integer) session.getAttribute("correctAnswers");
         if (correctAnswers != null && correctAnswers >= 10) {
-            System.out.println("отработка if");
+
             session.setAttribute("gameWon", true);
             resp.sendRedirect("index.jsp");
             return;
