@@ -23,15 +23,12 @@ public class WelcomeServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         HttpSession session = req.getSession(true);
+
+
         Boolean isCorrect = (Boolean) session.getAttribute("isCorrect");
 
-        System.out.println("isCorrect: " + isCorrect);
-        System.out.println("Counter: " + session.getAttribute("counter"));
-
         if (isCorrect != null && !isCorrect) {
-            resp.sendRedirect("gameover.jsp");
-            System.out.println("isCorrect: " + isCorrect);
-            System.out.println("Counter: " + session.getAttribute("counter"));
+            resp.sendRedirect("index.jsp");
             return;
         }
 
@@ -39,7 +36,10 @@ public class WelcomeServlet extends HttpServlet {
 
         if (session.getAttribute("username") == null) {
             String username = req.getParameter("username");
+            IdGenerator.setGeneratorId(0);
             session.setAttribute("username", username);
+            session.setAttribute("counter", null);
+
         }
 
         String path = context.getRealPath("/WEB-INF/resources/questions.txt");
@@ -48,23 +48,41 @@ public class WelcomeServlet extends HttpServlet {
         questions = (questions == null) ? new UnitRepository().getQuestions() : questions;
 
         Integer counter = (Integer) session.getAttribute("counter");
-        counter = (counter == null) ? 0 : counter + 1;
+        if (counter == null) {
+            counter = 0;
+        } else {
+            counter++;
+        }
 
         Unit unit = questions.get(counter);
 
-        if (unit == null) {
-            resp.sendRedirect("gameover.jsp");
+        System.out.println(counter);
+        System.out.println(unit.getQuestion());
+
+        // Проверяем количество правильных ответов
+        Integer correctAnswers = (Integer) session.getAttribute("correctAnswers");
+        if (correctAnswers != null && correctAnswers >= 10) {
+            session.setAttribute("gameWon", true);
+            resp.sendRedirect("index.jsp");
             return;
         }
 
+        // Если вопрос не null, продолжаем
         List<String> answers = new ArrayList<>();
         answers.add(unit.getCorrectAnswer());
         answers.add(unit.getWrongAnswer());
         Collections.shuffle(answers);
 
+        System.out.println(session.getAttribute("username"));
         session.setAttribute("answers", answers);
         session.setAttribute("questions", questions);
         session.setAttribute("counter", counter);
+        session.setAttribute("gameWon", false);
+
+        if (isCorrect != null && isCorrect) {
+            correctAnswers = (Integer) session.getAttribute("correctAnswers");
+            session.setAttribute("correctAnswers", (correctAnswers == null ? 1 : correctAnswers + 1));
+        }
 
         resp.sendRedirect("index.jsp");
     }

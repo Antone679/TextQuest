@@ -9,5 +9,8 @@
     <h1>Игра окончена!</h1>
     <p>Спасибо за участие!</p>
     <p>Ваш результат: ${sessionScope.counter} вопросов.</p>
+    <form action="welcome" method="post">
+                    <button type="submit">Попробовать еще раз!</button>
+                </form>
 </body>
 </html>

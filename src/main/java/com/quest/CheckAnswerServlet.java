@@ -26,15 +26,6 @@ public class CheckAnswerServlet extends HttpServlet {
         Unit currentQuestion = questions.get(Integer.parseInt(questionId));
 
         Boolean isCorrect = playerAnswer.trim().equalsIgnoreCase(currentQuestion.getCorrectAnswer().trim());
-
-        System.out.println("Player Answer: " + playerAnswer);
-        System.out.println("Correct Answer: " + currentQuestion.getCorrectAnswer());
-
-        System.out.println("______________________");
-        System.out.println("isCorrect: " + isCorrect);
-        System.out.println("Counter: " + session.getAttribute("counter"));
-        System.out.println("______________________");
-
         session.setAttribute("isCorrect", isCorrect);
 
         resp.sendRedirect("/welcome");
