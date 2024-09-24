@@ -1,4 +1,4 @@
-package com.quest;
+package com.quest.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

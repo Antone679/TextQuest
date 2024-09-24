@@ -1,4 +1,4 @@
-import com.quest.UnitRepository;
+import com.quest.repository.UnitRepository;
 
 public class App {
     public static void main(String[] args) {

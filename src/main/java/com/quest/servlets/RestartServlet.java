@@ -1,4 +1,4 @@
-package com.quest;
+package com.quest.servlets;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

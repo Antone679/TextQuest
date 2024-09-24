@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.quest.Unit" %>
+<%@ page import="com.quest.entity.Unit" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -93,11 +93,11 @@
             <h2>Игра окончена!</h2>
             <p>${sessionScope.failure}</p>
             <p>Количество правильных ответов: ${sessionScope.correctAnswers}</p>
+             <form action="reset" method="post">
+                            <button type="submit">Сыграть еще раз под тем же именем!</button>
+                        </form>
             <form action="restart" method="post">
-                <button type="submit">Попробовать еще раз!</button>
-            </form>
-            <form action="reset" method="post">
-                <button type="submit">Сбросить прогресс!</button>
+                <button type="submit">Попробовать под другим именем!</button>
             </form>
         </c:if>
 
@@ -105,12 +105,12 @@
             <h2>Поздравляем! Вы ответили на все вопросы правильно!</h2>
             <p>Вы успешно преодолели все трудности на необитаемом острове! Ваша находчивость и смелость помогли вам выжить.</p>
             <p>Количество правильных ответов: ${sessionScope.correctAnswers}</p>
-            <form action="restart" method="post">
-                <button type="submit">Попробовать еще раз!</button>
-            </form>
-            <form action="reset" method="post">
-                <button type="submit">Сбросить прогресс!</button>
-            </form>
+             <form action="reset" method="post">
+                                        <button type="submit">Сыграть еще раз под тем же именем!</button>
+                                    </form>
+                        <form action="restart" method="post">
+                            <button type="submit">Попробовать под другим именем!</button>
+                        </form>
         </c:if>
 
         <c:if test="${sessionScope.isCorrect == null || sessionScope.isCorrect == true}">

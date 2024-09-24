@@ -1,4 +1,4 @@
-package com.quest;
+package com.quest.utils;
 
 public class IdGenerator {
     private static int newId;

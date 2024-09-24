@@ -1,4 +1,6 @@
-package com.quest;
+package com.quest.servlets;
+
+import com.quest.entity.Unit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,15 +21,20 @@ public class CheckAnswerServlet extends HttpServlet {
             resp.sendRedirect("index.jsp");
             return;
         }
+
+        Boolean isCorrect = getCorrect(req, session);
+        session.setAttribute("isCorrect", isCorrect);
+
+        resp.sendRedirect("/welcome");
+    }
+
+    private static Boolean getCorrect(HttpServletRequest req, HttpSession session) {
         String questionId = req.getParameter("questionId");
         String playerAnswer = req.getParameter("answer");
 
         Map<Integer, Unit> questions = (Map<Integer, Unit>) session.getAttribute("questions");
         Unit currentQuestion = questions.get(Integer.parseInt(questionId));
 
-        Boolean isCorrect = playerAnswer.trim().equalsIgnoreCase(currentQuestion.getCorrectAnswer().trim());
-        session.setAttribute("isCorrect", isCorrect);
-
-        resp.sendRedirect("/welcome");
+        return playerAnswer.trim().equalsIgnoreCase(currentQuestion.getCorrectAnswer().trim());
     }
 }

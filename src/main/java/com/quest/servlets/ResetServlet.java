@@ -1,4 +1,6 @@
-package com.quest;
+package com.quest.servlets;
+
+import com.quest.utils.IdGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +18,13 @@ public class ResetServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
 
         Integer timesPlayed = (Integer) session.getAttribute("timesPlayed");
-        if (timesPlayed == null){
-            timesPlayed = 1;
-        } else {
-            timesPlayed++;
-        }
+        timesPlayed = getTimesPlayed(timesPlayed);
+        setAllAttributes(session, timesPlayed);
+
+        resp.sendRedirect("/welcome");
+    }
+
+    private static void setAllAttributes(HttpSession session, Integer timesPlayed) {
         session.removeAttribute("answers");
         session.removeAttribute("questions");
         session.removeAttribute("counter");
@@ -30,7 +34,14 @@ public class ResetServlet extends HttpServlet {
         session.removeAttribute("isCorrect");
         session.setAttribute("timesPlayed", timesPlayed);
         IdGenerator.setGeneratorId(0);
+    }
 
-        resp.sendRedirect("/welcome");
+    private static Integer getTimesPlayed(Integer timesPlayed) {
+        if (timesPlayed == null){
+            timesPlayed = 1;
+        } else {
+            timesPlayed++;
+        }
+        return timesPlayed;
     }
 }

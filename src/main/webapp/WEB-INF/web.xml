@@ -6,7 +6,7 @@
 
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>com.quest.CharacterEncodingFilter</filter-class> <!-- Измените на ваш пакет -->
+    <filter-class>com.quest.utils.CharacterEncodingFilter</filter-class> <!-- Измените на ваш пакет -->
     <init-param>
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
