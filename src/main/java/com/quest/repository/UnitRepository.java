@@ -24,7 +24,7 @@ public class UnitRepository implements Serializable {
         FILE_WITH_QUESTIONS = fileWithQuestions;
     }
 
-    private void initQuestions() {
+     void initQuestions() {
         this.questions = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_WITH_QUESTIONS.toFile()),
@@ -40,7 +40,7 @@ public class UnitRepository implements Serializable {
         }
     }
 
-    private void init(String line) {
+     void init(String line) {
         Unit unit;
         String[] data = line.split(";");
 

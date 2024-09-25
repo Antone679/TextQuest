@@ -28,7 +28,7 @@ public class CheckAnswerServlet extends HttpServlet {
         resp.sendRedirect("/welcome");
     }
 
-    private static Boolean getCorrect(HttpServletRequest req, HttpSession session) {
+     static Boolean getCorrect(HttpServletRequest req, HttpSession session) {
         String questionId = req.getParameter("questionId");
         String playerAnswer = req.getParameter("answer");
 

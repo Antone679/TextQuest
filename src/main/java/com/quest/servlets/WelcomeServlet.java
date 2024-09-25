@@ -32,7 +32,7 @@ public class WelcomeServlet extends HttpServlet {
         Boolean isCorrect = (Boolean) session.getAttribute("isCorrect");
 
         //проверяем, правильный ли ответ
-        if (checkIfAnswerIsCorrect(resp, isCorrect)) return;
+        if (checkIfAnswerIsIncorrect(resp, isCorrect)) return;
 
         //устанавливаем имя, если null
         setUsernameIfNull(req, session);
@@ -49,7 +49,7 @@ public class WelcomeServlet extends HttpServlet {
             incrementCorrectAnswers(session);
         }
         correctAnswers = (Integer) session.getAttribute("correctAnswers");
-        if (correctAnswers != null && correctAnswers >= 10) {
+        if (correctAnswers != null && correctAnswers >= questions.size()) {
             redirectIfWin(resp, session);
             return;
         }
@@ -99,7 +99,7 @@ public class WelcomeServlet extends HttpServlet {
         return counter;
     }
 
-    private static Map<Integer, Unit> initQuestions(ServletContext context, HttpSession session) {
+    static Map<Integer, Unit> initQuestions(ServletContext context, HttpSession session) {
         String path = context.getRealPath("/WEB-INF/resources/questions.txt");
         UnitRepository.setFileWithQuestions(Path.of(path));
         Map<Integer, Unit> questions = (Map<Integer, Unit>) session.getAttribute("questions");
@@ -107,7 +107,7 @@ public class WelcomeServlet extends HttpServlet {
         return questions;
     }
 
-    private static void setUsernameIfNull(HttpServletRequest req, HttpSession session) {
+    static void setUsernameIfNull(HttpServletRequest req, HttpSession session) {
         if (session.getAttribute("username") == null) {
             String username = req.getParameter("username");
             IdGenerator.setGeneratorId(0);
@@ -116,7 +116,7 @@ public class WelcomeServlet extends HttpServlet {
         }
     }
 
-    private static boolean checkIfAnswerIsCorrect(HttpServletResponse resp, Boolean isCorrect) throws IOException {
+    static boolean checkIfAnswerIsIncorrect(HttpServletResponse resp, Boolean isCorrect) throws IOException {
         if (isCorrect != null && !isCorrect) {
             resp.sendRedirect("index.jsp");
             return true;
@@ -124,7 +124,7 @@ public class WelcomeServlet extends HttpServlet {
         return false;
     }
 
-    private static void maintainIpAddress(HttpServletRequest req, HttpSession session) {
+    static void maintainIpAddress(HttpServletRequest req, HttpSession session) {
         String ipAddress = req.getRemoteAddr();
         session.setAttribute("ipAddress", ipAddress);
     }

@@ -24,7 +24,7 @@ public class ResetServlet extends HttpServlet {
         resp.sendRedirect("/welcome");
     }
 
-    private static void setAllAttributes(HttpSession session, Integer timesPlayed) {
+    static void setAllAttributes(HttpSession session, Integer timesPlayed) {
         session.removeAttribute("answers");
         session.removeAttribute("questions");
         session.removeAttribute("counter");
@@ -36,7 +36,7 @@ public class ResetServlet extends HttpServlet {
         IdGenerator.setGeneratorId(0);
     }
 
-    private static Integer getTimesPlayed(Integer timesPlayed) {
+    static Integer getTimesPlayed(Integer timesPlayed) {
         if (timesPlayed == null){
             timesPlayed = 1;
         } else {
