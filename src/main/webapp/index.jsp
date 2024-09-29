@@ -47,10 +47,10 @@
              width: 33%;
                  }
         hr {
-             border: none; /* Убираем стандартные стили */
-             height: 2px; /* Высота линии */
-             background-color: #555; /* Цвет линии */
-             margin: 20px 0; /* Отступы сверху и снизу */
+             border: none;
+             height: 2px;
+             background-color: #555;
+             margin: 20px 0;
                width: 33%;
                  }
     </style>
@@ -93,7 +93,7 @@
         <c:if test="${sessionScope.isCorrect != null && sessionScope.isCorrect == false}">
             <h2>Игра окончена!</h2>
             <p>${sessionScope.failure}</p>
-            <p>Количество правильных ответов: ${sessionScope.correctAnswers}</p>
+             <p>Количество правильных ответов: ${sessionScope.correctAnswers != null ? sessionScope.correctAnswers : 0}</p>
              <form action="reset" method="post">
                             <button type="submit">Сыграть еще раз под тем же именем!</button>
                         </form>
@@ -131,6 +131,7 @@
                             <input type="hidden" name="questionId" value="${currentQuestion.id}"/>
                             <button type="submit" name="answer" value="${answer}">${answer}</button>
                         </form>
+                        <br>
                     </c:forEach>
                 </c:if>
             </c:if>
