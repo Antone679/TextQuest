@@ -57,6 +57,15 @@
 </head>
 <body style="background-color: #f0f8ff;">
 
+<%
+ Boolean auth = (Boolean) session.getAttribute("auth");
+
+    if (auth == null || auth == false) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
  <div id="footer3">
                <hr>
         </div>
