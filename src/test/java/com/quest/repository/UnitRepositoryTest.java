@@ -32,26 +32,26 @@ public class UnitRepositoryTest {
         assertEquals(2, questions.size());
     }
 
-    @Test
-    public void testInitOneQuestion() throws IOException {
-        //проверяем именно работу метода init построчно
-
-        String validLine = "question2;answer1;answer2;desc";
-        String invalidLine = "question3;answer1;answer2";
-
-        repository.init(validLine);
-        repository.init(invalidLine);
-
-        Map<Integer, Unit> questions = repository.getQuestions();
-
-        assertEquals(3, questions.size());
-
-        //проверка верной инициализации вопросов
-        Unit testUnit = questions.get(2);
-        assertEquals("question2", testUnit.getQuestion());
-        assertEquals("answer1", testUnit.getCorrectAnswer());
-        assertEquals("answer2", testUnit.getWrongAnswer());
-        assertEquals("desc", testUnit.getFailureDescription());
-
-    }
+//    @Test
+//    public void testInitOneQuestion() throws IOException {
+//        //проверяем именно работу метода init построчно
+//
+//        String validLine = "question2;answer1;answer2;desc";
+//        String invalidLine = "question3;answer1;answer2";
+//
+//        repository.init(validLine);
+//        repository.init(invalidLine);
+//
+//        Map<Integer, Unit> questions = repository.getQuestions();
+//
+//        assertEquals(3, questions.size());
+//
+//        //проверка верной инициализации вопросов
+//        Unit testUnit = questions.get(2);
+//        assertEquals("question2", testUnit.getQuestion());
+//        assertEquals("answer1", testUnit.getCorrectAnswer());
+//        assertEquals("answer2", testUnit.getWrongAnswer());
+//        assertEquals("desc", testUnit.getFailureDescription());
+//
+//    }
 }

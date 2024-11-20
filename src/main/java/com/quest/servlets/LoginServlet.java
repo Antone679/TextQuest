@@ -1,7 +1,7 @@
 package com.quest.servlets;
 
-import com.quest.repository.PasswordRepository;
-import com.quest.utils.HashPassword;
+import com.quest.repository.UserRepository;
+import com.quest.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +20,16 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        PasswordRepository repository = new PasswordRepository();
-        if (checkLogin(resp, repository, username, session)) return;
+        UserService service = new UserService(new UserRepository());
 
-        String hashPassword = HashPassword.hashPassword(password);
 
-        checkPassword(resp, repository, username, hashPassword, session);
+        if (checkLogin(resp, service, username, session)) return;
+
+        checkPassword(resp, service, password, session);
     }
 
-     static void checkPassword(HttpServletResponse resp, PasswordRepository repository, String username, String hashPassword, HttpSession session) throws IOException {
-        if (repository.getUsers().get(username).equals(hashPassword)){
+     static void checkPassword(HttpServletResponse resp, UserService service, String password, HttpSession session) throws IOException {
+        if (service.checkPassword(password)){
             session.setAttribute("auth", true);
             resp.sendRedirect("/welcome");
         }
@@ -39,9 +39,8 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-     static boolean checkLogin(HttpServletResponse resp, PasswordRepository repository, String username, HttpSession session) throws IOException {
-        if (!repository.getUsers().containsKey(username)){
-
+    static boolean checkLogin(HttpServletResponse resp, UserService service, String name, HttpSession session) throws IOException {
+        if (!service.checkLogin(name)) {
             session.setAttribute("auth", false);
             resp.sendRedirect("/login.jsp");
             return true;

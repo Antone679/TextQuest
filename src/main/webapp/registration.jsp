@@ -34,32 +34,37 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <h3>
-  Авторизация
+  Регистрация
   <br>
   <small class="text-body-secondary">  в мир квестов</small>
 </h3>
 
-   <c:if test="${sessionScope.auth == false}">
- <div class="text-bg-danger p-3">Неверный логин или пароль!</div>
+ <c:if test="${sessionScope.existLogin == true}">
+ <div class="text-bg-danger p-3">Такой логин уже занят!</div>
     </c:if>
-    <form action="login" method="post" class="login-form">
 
+     <c:if test="${sessionScope.existPassword == true}">
+     <div class="text-bg-danger p-3">Такой пароль уже используется!</div>
+        </c:if>
 
+<form action="register" method="post" class="login-form">
         <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username" required placeholder="user">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name" required placeholder="name">
         </div>
 
          <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" required placeholder="****">
+                  <input type="password" class="form-control" id="password" name="password" required placeholder="*">
                 </div>
-
+<div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required placeholder="name@domain.com">
+                </div>
         <div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </div>
-        <br>
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='registration.jsp'">Регистрация</button>
     </form>
+
 </body>
 </html>
