@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +35,9 @@ public class User {
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date lastUpdate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Game> games;
 
     public User(String name, String password, String email) {
         this.name = name;
@@ -107,6 +111,14 @@ public class User {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 
     @Override

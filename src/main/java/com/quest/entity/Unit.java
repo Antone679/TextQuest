@@ -1,10 +1,12 @@
 package com.quest.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Unit implements Serializable {
     private int id;
+    @Serial
     private static final long serialVersionUID = 1L;
     private String question;
     private String correctAnswer;

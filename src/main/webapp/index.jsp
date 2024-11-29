@@ -14,12 +14,15 @@
     <style>
         h1 {
             font-size: 2.5em;
+            padding-left: 1.5em;
         }
         h2 {
             font-size: 1.5em;
+            padding-left: 1.5em;
         }
         h3 {
             font-size: 1.0em;
+            padding-left: 1.5em;
         }
         p {
             width: 33%;
@@ -31,20 +34,20 @@
             bottom: 10px;
             left: 10px;
             font-size: 14px;
-            color: #555;
+            color: white;
                 }
         #footer2 {
             position: fixed;
             bottom: 30px;
             left: 10px;
             font-size: 14px;
-            color: #555;
+            color: white;
                 }
         #footer3 {
              position: fixed;
              bottom: 45px;
              left: 10px;
-             color: #555;
+             color: white;
              width: 33%;
                  }
         hr {
@@ -54,6 +57,20 @@
              margin: 20px 0;
                width: 33%;
                  }
+                 body {
+
+                 height: 100vh;
+                  margin: 0;
+                  background-image: url("<%= request.getContextPath() %>/images/green_blue_back.jpg");
+                  background-size: cover; /* Масштабирование изображения */
+                  background-position: center; /* Центрирование изображения */
+                  background-repeat: no-repeat; /* Без повторения изображения */
+                  height: 100vh; /* Занимает всю высоту экрана */
+                  color: white;
+                             }
+                  .black-text {
+                  color: black;
+                  }
     </style>
 </head>
 <body style="background-color: #f0f8ff;">
@@ -61,37 +78,38 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar scroll</a>
+    <a class="navbar-brand" href="#">Стартовая страница</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" aria-current="page" href="#">О нас</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
+            Квесты
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Необитаемый остров</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Ведьмак</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Космическая одиссея</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Link</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+ </ul>
+
+  <div class="d-flex align-items-center"> <!-- Обернуть форму и выход в div -->
+          <form class="d-flex me-2" role="search"> <!-- Добавить класс me-2 для отступа -->
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+          <a class="nav-link black-text" href="#">Выход</a>
+        </div>
+
     </div>
   </div>
 </nav>
